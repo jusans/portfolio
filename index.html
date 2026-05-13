@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Selected Work</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Bebas+Neue&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #0c0c0c;
+      --surface:  #141414;
+      --line:     #2a2a2a;
+      --dim:      #555;
+      --mid:      #999;
+      --text:     #e8e4dc;
+      --accent:   #c8b89a;
+      --gap:      clamp(3rem, 8vw, 7rem);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      padding: clamp(2.5rem, 5vw, 4rem) clamp(1.5rem, 6vw, 5rem);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .site-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .site-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--dim);
+      letter-spacing: 0.06em;
+      text-align: right;
+      line-height: 1.8;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      padding: var(--gap) clamp(1.5rem, 6vw, 5rem);
+      max-width: 680px;
+    }
+
+    .intro p {
+      font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      color: var(--dim);
+      text-transform: uppercase;
+    }
+
+    /* ── PROJECTS ── */
+    main {
+      padding: 0 clamp(1.5rem, 6vw, 5rem) var(--gap);
+    }
+
+    /* ── PROJECT: FEATURED (Bats on the Moon) ── */
+    .project-featured {
+      border-top: 1px solid var(--line);
+      padding-top: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    .project-featured .project-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .project-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.02em;
+      color: var(--text);
+    }
+
+    .project-subtitle {
+      font-style: italic;
+      color: var(--accent);
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      margin-top: 0.4rem;
+    }
+
+    .project-year {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+      white-space: nowrap;
+    }
+
+    /* VIDEO */
+    .video-wrap {
+      position: relative;
+      width: 100%;
+      background: #000;
+      margin-bottom: 2rem;
+    }
+
+    .video-wrap video {
+      width: 100%;
+      display: block;
+      max-height: 80vh;
+      object-fit: contain;
+    }
+
+    /* VIDEO PLACEHOLDER (shown when file is missing) */
+    .video-placeholder {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface);
+      border: 1px dashed var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .video-placeholder span {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--dim);
+      letter-spacing: 0.1em;
+    }
+
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr));
+      gap: 3px;
+      margin-top: 3px;
+    }
+
+    .gallery img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.9);
+      transition: filter 0.3s ease;
+    }
+
+    .gallery img:hover { filter: brightness(1); }
+
+    /* gallery with one featured large item */
+    .gallery.gallery-hero {
+      grid-template-columns: 2fr 1fr;
+      grid-template-rows: auto auto;
+    }
+
+    .gallery.gallery-hero .gallery-item-hero {
+      grid-row: 1 / 3;
+    }
+
+    .gallery.gallery-hero .gallery-item-hero img {
+      aspect-ratio: auto;
+      height: 100%;
+    }
+
+    /* ── PROJECT: STANDARD ── */
+    .project-standard {
+      border-top: 1px solid var(--line);
+      padding-top: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: clamp(2.5rem, 5vw, 4rem);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem 5rem;
+    }
+
+    @media (max-width: 700px) {
+      .project-standard { grid-template-columns: 1fr; gap: 1.5rem; }
+      .gallery.gallery-hero { grid-template-columns: 1fr; }
+      .gallery.gallery-hero .gallery-item-hero { grid-row: auto; }
+      .gallery.gallery-hero .gallery-item-hero img { height: auto; aspect-ratio: 16/9; }
+    }
+
+    .project-info { }
+
+    .project-info .project-title-sm {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin: 0.5rem 0 1rem;
+    }
+
+    .project-info .project-desc {
+      font-size: 0.95rem;
+      color: var(--mid);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .project-body { }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 2rem clamp(1.5rem, 6vw, 5rem);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      cursor: zoom-out;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: 92vw;
+      max-height: 92vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.72rem;letter-spacing:0.14em;color:var(--dim);margin-bottom:0.35rem;">Juan Sanabria</div>
+      <a class="site-name" href="#">Selected Work</a>
+    </div>
+    <div class="site-meta"></div>
+  </header>
+
+  <main>
+
+    <!-- ══════════════════════════════════════════
+         PROJECT 1 — BATS ON THE MOON (featured)
+         ══════════════════════════════════════════ -->
+    <section class="project-featured fade-in">
+
+      <div class="project-header">
+        <div>
+          <div class="section-label">01 — Featured</div>
+          <h2 class="project-title">Bats on<br>the Moon</h2>
+          <div class="project-subtitle">Vespertilio Man</div>
+        </div>
+        <div class="project-year">2024</div>
+      </div>
+
+      <!-- ↓ TEASER VIDEO
+           Replace "media/bats/teaser.mp4" with your actual file path.
+           Add a poster="media/bats/poster.jpg" attribute for a thumbnail. -->
+      <div class="video-wrap">
+        <video controls preload="none" poster="media/bats/poster.jpg">
+          <source src="media/bats/teaser.mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+
+      <!-- ↓ STILLS GALLERY
+           Add or remove <img> tags as needed.
+           Filenames: media/bats/still-01.jpg, still-02.jpg, etc. -->
+      <div class="gallery gallery-hero" id="bats-gallery">
+        <div class="gallery-item-hero">
+          <img src="media/bats/still-01.jpg" alt="Bats on the Moon — still 1" loading="lazy" />
+        </div>
+        <img src="media/bats/still-02.jpg" alt="Bats on the Moon — still 2" loading="lazy" />
+        <img src="media/bats/still-03.jpg" alt="Bats on the Moon — still 3" loading="lazy" />
+      </div>
+
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         PROJECT 2 — LARA AND THE BEAST
+         ══════════════════════════════════════════ -->
+    <section class="project-standard fade-in">
+
+      <div class="project-info">
+        <div class="section-label">02</div>
+        <h2 class="project-title-sm">Lara and<br>the Beast</h2>
+        <p class="project-desc">
+          <!-- Optional: add a short description of the project -->
+        </p>
+        <br>
+        <div class="project-year" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--dim);letter-spacing:.1em;">2024</div>
+      </div>
+
+      <div class="project-body">
+
+        <!-- ↓ CLIP VIDEO
+             Replace "media/lara/clip.mp4" with your actual file path. -->
+        <div class="video-wrap" style="margin-bottom:3px;">
+          <video controls preload="none" poster="media/lara/poster.jpg">
+            <source src="media/lara/clip.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+
+        <!-- ↓ IMAGE GALLERY
+             Add as many <img> tags as you have. They'll flow automatically. -->
+        <div class="gallery" id="lara-gallery">
+          <img src="media/lara/img-01.jpg" alt="Lara and the Beast — 1" loading="lazy" />
+          <img src="media/lara/img-02.jpg" alt="Lara and the Beast — 2" loading="lazy" />
+          <img src="media/lara/img-03.jpg" alt="Lara and the Beast — 3" loading="lazy" />
+          <img src="media/lara/img-04.jpg" alt="Lara and the Beast — 4" loading="lazy" />
+          <img src="media/lara/img-05.jpg" alt="Lara and the Beast — 5" loading="lazy" />
+          <img src="media/lara/img-06.jpg" alt="Lara and the Beast — 6" loading="lazy" />
+          <!-- Add more img tags here as needed -->
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ══════════════════════════════════════════
+         PROJECT 3 — GOODDO
+         ══════════════════════════════════════════ -->
+    <section class="project-standard fade-in">
+
+      <div class="project-info">
+        <div class="section-label">03</div>
+        <h2 class="project-title-sm">Gooddo</h2>
+        <p class="project-desc">
+          <!-- Optional: add a short description -->
+        </p>
+        <br>
+        <div class="project-year" style="font-family:'DM Mono',monospace;font-size:0.72rem;color:var(--dim);letter-spacing:.1em;">2024</div>
+      </div>
+
+      <div class="project-body">
+
+        <!-- ↓ ANIMATED POSTER
+             Works with .mp4, .webm, or .gif
+             For autoplay muted loop (like a poster), use the video tag below.
+             If you have a .gif, replace with: <img src="media/gooddo/poster.gif" ... /> -->
+        <div class="video-wrap">
+          <video autoplay muted loop playsinline>
+            <source src="media/gooddo/poster.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2024 — All rights reserved</p>
+  </footer>
+
+  <!-- LIGHTBOX (click any image to enlarge) -->
+  <div id="lightbox">
+    <img id="lightbox-img" src="" alt="" />
+  </div>
+
+  <script>
+    // ── Lightbox ──
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lightbox-img');
+
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => {
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('open');
+      });
+    });
+
+    lb.addEventListener('click', () => lb.classList.remove('open'));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') lb.classList.remove('open');
+    });
+
+    // ── Fade-in on scroll ──
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
